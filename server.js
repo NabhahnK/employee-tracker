@@ -14,7 +14,8 @@ function mainOptions() {
                 name: "option",
                 type: "list",
                 message: "What do you want to do?",
-                choices: [ "View all Departments", "choice B" ]
+                choices: [ "View all Departments", "View all Roles", "View all Employees",
+                        "Add a Department", "Add a Role", "Add an Employee"]
             }
         ])
         .then((answer) => {
