@@ -1,19 +1,41 @@
+require('dotenv').config();
 const mysql = require("mysql2");
 const cTable = require("console.table");
 const inquirer = require("inquirer");
+// Make a class with db as methonds/ do this after it works
+
+// View tables on console
+function viewTables(table) {
+    switch (table.option) {
+        case "View all Departments":
+            db.query(`SELECT * FROM department`, (err, result) => {
+                if (err) {
+                    console.log(err);
+                }
+                console.log(result);
+            })
+            break;
+    };
+    // db.query(`SELECT * FROM ?`, selection, (err, result) => {
+    //     if (err) {
+    //         console.log(err);
+    //     }
+    //     console.log(result);
+    // })
+}
 
 // Connect to database
-// const db = mysql.createConnection(
-//     {
-//         host: process.env.DB_LOCATION,
-//         // MySQL username,
-//         user: process.env.DB_USER,
-//         // MySQL password
-//         password: process.env.DB_PASSWORD,
-//         database: 'employees_db'
-//     },
-//     console.log(`Connected to the employees_db database.`)
-// );
+const db = mysql.createConnection(
+    {
+        host: "localhost",
+        // MySQL username,
+        user: "root",
+        // MySQL password
+        password: "Sh@dow/<night43",
+        database: 'employees_db'
+    },
+    console.log(`Connected to the employees_db database.`)
+);
 
 function init() {
     mainOptions();
@@ -35,6 +57,7 @@ function mainOptions() {
             const option = answer;
             // team.push(manager);
             console.log(option);
+            viewTables(option);
             // checkBuildStatus();
         });
 }
