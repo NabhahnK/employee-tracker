@@ -128,7 +128,7 @@ function userAction(table) {
                     {
                         name: "id",
                         type: "input",
-                        message: "What is the employrr ID?"
+                        message: "What is the employees ID?"
                     },
                     {
                         name: "first_name",
@@ -137,7 +137,7 @@ function userAction(table) {
                     },
                     {
                         name: "last_name",
-                        type: "number",
+                        type: "input",
                         message: "What is the employees last name?"
                     },
                     {
@@ -156,7 +156,7 @@ function userAction(table) {
                     const option = answer;
                     console.log(option);
                     db.query(`INSERT INTO employee
-                        VALUES(?,?,?,?)`, [option.id, option.first_name, option.last_name, option.role_id, option.manager_id], (err, result) => {
+                        VALUES(?,?,?,?,?)`, [option.id, option.first_name, option.last_name, option.role_id, option.manager_id], (err, result) => {
                         if (err) {
                             console.log(err);
                         }
@@ -171,7 +171,7 @@ function userAction(table) {
                     {
                         name: "role_id",
                         type: "number",
-                        message: "What is the new role ID ID?"
+                        message: "What is the new role ID?"
                     },
                     {
                         name: "employee_id",
