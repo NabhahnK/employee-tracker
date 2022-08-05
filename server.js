@@ -4,6 +4,28 @@ const inquirer = require("inquirer");
 require('dotenv').config();
 // Make a class with db as methonds/ do this after it works
 
+// ask if done viewing
+function askDone() {
+    inquirer
+                .prompt([
+                    {
+                        name: "tf",
+                        type: "confirm",
+                        message: "Are you done viewing?"
+                    }
+
+                ])
+                .then((answer) => {
+                    const option = answer;
+                    console.log(option);
+                    if (option.tf) {
+                        mainOptions();
+                    } else {
+                        askDone();
+                    }
+                });
+}
+
 // View tables on console
 function userAction(table) {
     switch (table.option) {
@@ -13,6 +35,7 @@ function userAction(table) {
                     console.log(err);
                 }
                 console.table(result);
+                askDone();
             })
             break;
         case "View all Roles":
@@ -21,6 +44,7 @@ function userAction(table) {
                     console.log(err);
                 }
                 console.table(result);
+                askDone();
             })
             break;
         case "View all Employees":
@@ -29,6 +53,7 @@ function userAction(table) {
                     console.log(err);
                 }
                 console.table(result);
+                askDone();
             })
             break;
         case "Add a Department":
@@ -55,6 +80,7 @@ function userAction(table) {
                             console.log(err);
                         }
                         console.log("Added Department.");
+                        mainOptions();
                     })
                 });
             break;
@@ -92,6 +118,7 @@ function userAction(table) {
                             console.log(err);
                         }
                         console.log("Added Role.");
+                        mainOptions();
                     })
                 });
             break;
@@ -134,6 +161,7 @@ function userAction(table) {
                             console.log(err);
                         }
                         console.log("Added employee.");
+                        mainOptions();
                     })
                 });
             break;
@@ -160,6 +188,7 @@ function userAction(table) {
                             console.log(err);
                         }
                         console.log("Updated employee role.");
+                        mainOptions();
                     })
                 });
             break;
