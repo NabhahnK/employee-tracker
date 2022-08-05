@@ -5,7 +5,7 @@ const inquirer = require("inquirer");
 // Make a class with db as methonds/ do this after it works
 
 // View tables on console
-function viewTables(table) {
+function userAction(table) {
     switch (table.option) {
         case "View all Departments":
             db.query(`SELECT * FROM department`, (err, result) => {
@@ -16,7 +16,7 @@ function viewTables(table) {
             })
             break;
         case "View all Roles":
-            db.query(`SELECT * FROM department`, (err, result) => {
+            db.query(`SELECT * FROM role`, (err, result) => {
                 if (err) {
                     console.log(err);
                 }
@@ -24,7 +24,7 @@ function viewTables(table) {
             })
             break;
         case "View all Employees":
-            db.query(`SELECT * FROM department`, (err, result) => {
+            db.query(`SELECT * FROM employee`, (err, result) => {
                 if (err) {
                     console.log(err);
                 }
@@ -98,7 +98,7 @@ function mainOptions() {
         .then((answer) => {
             const option = answer;
             console.log(option);
-            viewTables(option);
+            userAction(option);
         });
 }
 
