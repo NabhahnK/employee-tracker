@@ -12,16 +12,58 @@ function viewTables(table) {
                 if (err) {
                     console.log(err);
                 }
-                console.log(result);
+                console.table(result);
             })
             break;
-    };
-    // db.query(`SELECT * FROM ?`, selection, (err, result) => {
-    //     if (err) {
-    //         console.log(err);
-    //     }
-    //     console.log(result);
-    // })
+        case "View all Roles":
+            db.query(`SELECT * FROM department`, (err, result) => {
+                if (err) {
+                    console.log(err);
+                }
+                console.table(result);
+            })
+            break;
+        case "View all Employees":
+            db.query(`SELECT * FROM department`, (err, result) => {
+                if (err) {
+                    console.log(err);
+                }
+                console.table(result);
+            })
+            break;
+        case "Add a Department":
+            db.query(`SELECT * FROM department`, (err, result) => {
+                if (err) {
+                    console.log(err);
+                }
+                console.table(result);
+            })
+            break;
+        case "Add a Role":
+            db.query(`SELECT * FROM department`, (err, result) => {
+                if (err) {
+                    console.log(err);
+                }
+                console.table(result);
+            })
+            break;
+        case "Add an Employee":
+            db.query(`SELECT * FROM department`, (err, result) => {
+                if (err) {
+                    console.log(err);
+                }
+                console.table(result);
+            })
+            break;
+        case "Update an Employee Role":
+            db.query(`SELECT * FROM department`, (err, result) => {
+                if (err) {
+                    console.log(err);
+                }
+                console.table(result);
+            })
+            break;
+    }
 }
 
 // Connect to database
@@ -55,10 +97,8 @@ function mainOptions() {
         ])
         .then((answer) => {
             const option = answer;
-            // team.push(manager);
             console.log(option);
             viewTables(option);
-            // checkBuildStatus();
         });
 }
 
