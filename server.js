@@ -1,18 +1,8 @@
-require('dotenv').config();
 const mysql = require("mysql2");
 const cTable = require("console.table");
 const inquirer = require("inquirer");
+require('dotenv').config();
 // Make a class with db as methonds/ do this after it works
-
-// a fuction that inserts data into tables
-function addRow(table, id, name) {
-    db.query(`INSERT INTO ?(?,?)`, [table, id, name], (err, result) => {
-        if (err) {
-            console.log(err);
-        }
-        console.table(result);
-    })
-}
 
 // View tables on console
 function userAction(table) {
@@ -45,19 +35,28 @@ function userAction(table) {
             inquirer
                 .prompt([
                     {
-                        name: "option",
-                        type: "list",
-                        message: "What do you want to do?",
-                        choices: ["View all Departments", "View all Roles", "View all Employees",
-                            "Add a Department", "Add a Role", "Add an Employee", "Update an Employee Role"]
+                        name: "id",
+                        type: "input",
+                        message: "What is the department ID?"
+                    },
+                    {
+                        name: "name",
+                        type: "input",
+                        message: "What is the department name?"
                     }
+
                 ])
                 .then((answer) => {
                     const option = answer;
                     console.log(option);
-                    userAction(option);
+                    db.query(`INSERT INTO department
+                            VALUES(?,?)`, [option.id, option.name], (err, result) => {
+                        if (err) {
+                            console.log(err);
+                        }
+                        console.log("Added Department.");
+                    })
                 });
-            addRow("department", id, name)
             break;
         case "Add a Role":
             db.query(`SELECT * FROM department`, (err, result) => {
