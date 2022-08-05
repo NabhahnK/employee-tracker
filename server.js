@@ -96,12 +96,46 @@ function userAction(table) {
                 });
             break;
         case "Add an Employee":
-            db.query(`SELECT * FROM department`, (err, result) => {
-                if (err) {
-                    console.log(err);
-                }
-                console.table(result);
-            })
+            inquirer
+                .prompt([
+                    {
+                        name: "id",
+                        type: "input",
+                        message: "What is the employrr ID?"
+                    },
+                    {
+                        name: "first_name",
+                        type: "input",
+                        message: "What is the employees first name?"
+                    },
+                    {
+                        name: "last_name",
+                        type: "number",
+                        message: "What is the employees last name?"
+                    },
+                    {
+                        name: "role_id",
+                        type: "input",
+                        message: "What is the role ID that the employee belongs to?"
+                    },
+                    {
+                        name: "manager_id",
+                        type: "input",
+                        message: "What is the manager ID that the employee works for?"
+                    }
+
+                ])
+                .then((answer) => {
+                    const option = answer;
+                    console.log(option);
+                    db.query(`INSERT INTO employee
+                        VALUES(?,?,?,?)`, [option.id, option.first_name, option.last_name, option.role_id, option.manager_id], (err, result) => {
+                        if (err) {
+                            console.log(err);
+                        }
+                        console.log("Added employee.");
+                    })
+                });
             break;
         case "Update an Employee Role":
             db.query(`SELECT * FROM department`, (err, result) => {
