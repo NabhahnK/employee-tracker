@@ -59,12 +59,41 @@ function userAction(table) {
                 });
             break;
         case "Add a Role":
-            db.query(`SELECT * FROM department`, (err, result) => {
-                if (err) {
-                    console.log(err);
-                }
-                console.table(result);
-            })
+            inquirer
+                .prompt([
+                    {
+                        name: "id",
+                        type: "input",
+                        message: "What is the role ID?"
+                    },
+                    {
+                        name: "title",
+                        type: "input",
+                        message: "What is the role title?"
+                    },
+                    {
+                        name: "salary",
+                        type: "number",
+                        message: "What is the role salary?"
+                    },
+                    {
+                        name: "department_id",
+                        type: "input",
+                        message: "What is the department ID that the role belongs to?"
+                    }
+
+                ])
+                .then((answer) => {
+                    const option = answer;
+                    console.log(option);
+                    db.query(`INSERT INTO role
+                        VALUES(?,?,?,?)`, [option.id, option.title, option.salary, option.department_id], (err, result) => {
+                        if (err) {
+                            console.log(err);
+                        }
+                        console.log("Added Role.");
+                    })
+                });
             break;
         case "Add an Employee":
             db.query(`SELECT * FROM department`, (err, result) => {
