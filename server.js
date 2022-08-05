@@ -138,12 +138,30 @@ function userAction(table) {
                 });
             break;
         case "Update an Employee Role":
-            db.query(`SELECT * FROM department`, (err, result) => {
-                if (err) {
-                    console.log(err);
-                }
-                console.table(result);
-            })
+            inquirer
+                .prompt([
+                    {
+                        name: "role_id",
+                        type: "number",
+                        message: "What is the new role ID ID?"
+                    },
+                    {
+                        name: "employee_id",
+                        type: "number",
+                        message: "What is the employee ID?"
+                    }
+
+                ])
+                .then((answer) => {
+                    const option = answer;
+                    console.log(option);
+                    db.query(`UPDATE employee SET role_id = ? WHERE id = ?`, [option.role_id, option.employee_id], (err, result) => {
+                        if (err) {
+                            console.log(err);
+                        }
+                        console.log("Updated employee role.");
+                    })
+                });
             break;
     }
 }
