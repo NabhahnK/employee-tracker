@@ -4,6 +4,16 @@ const cTable = require("console.table");
 const inquirer = require("inquirer");
 // Make a class with db as methonds/ do this after it works
 
+// a fuction that inserts data into tables
+function addRow(table, id, name) {
+    db.query(`INSERT INTO ?(?,?)`, [table, id, name], (err, result) => {
+        if (err) {
+            console.log(err);
+        }
+        console.table(result);
+    })
+}
+
 // View tables on console
 function userAction(table) {
     switch (table.option) {
@@ -32,12 +42,22 @@ function userAction(table) {
             })
             break;
         case "Add a Department":
-            db.query(`SELECT * FROM department`, (err, result) => {
-                if (err) {
-                    console.log(err);
-                }
-                console.table(result);
-            })
+            inquirer
+                .prompt([
+                    {
+                        name: "option",
+                        type: "list",
+                        message: "What do you want to do?",
+                        choices: ["View all Departments", "View all Roles", "View all Employees",
+                            "Add a Department", "Add a Role", "Add an Employee", "Update an Employee Role"]
+                    }
+                ])
+                .then((answer) => {
+                    const option = answer;
+                    console.log(option);
+                    userAction(option);
+                });
+            addRow("department", id, name)
             break;
         case "Add a Role":
             db.query(`SELECT * FROM department`, (err, result) => {
