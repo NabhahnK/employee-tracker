@@ -28,9 +28,9 @@
 
   If you do want to ask me any questions, you can email me directly.
 
-  You can send me any additional questions at my email undefined.
+  You can send me any additional questions at my email NabhahnK@gmail.com.
 
-  My [GitHub](https://github.com/NabhahnK)
+  My [GitHub](https://github.com/Nabhahnk)
 
 ### License
     
